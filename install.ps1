@@ -159,7 +159,7 @@ function Install-Local {
     }
 
     Write-Info "正在下载插件..."
-    git clone https://github.com/your-username/tdx-finance-mcp-plugin.git $pluginDir | Out-Null
+    git clone https://github.com/adambbhe/tdx-finance-mcp-plugin.git $pluginDir | Out-Null
     if (-not $?) {
         Write-ErrorCustom "无法克隆仓库！请检查网络连接或仓库地址"
         exit 1
@@ -322,7 +322,7 @@ function Show-NextSteps {
     Write-Host "📚 文档与支持："
     Write-Host "  - 完整文档: README.md"
     Write-Host "  - API参考: README.md#api文档"
-    Write-Host "  - 问题反馈: https://github.com/your-username/tdx-finance-mcp-plugin/issues"
+    Write-Host "  - 问题反馈: https://github.com/adambbhe/tdx-finance-mcp-plugin/issues"
     Write-Host ""
     Write-Host "==========================================" -ForegroundColor White
 }

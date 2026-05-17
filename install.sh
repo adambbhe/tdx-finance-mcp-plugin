@@ -100,7 +100,7 @@ install_local() {
     fi
 
     print_info "正在下载插件..."
-    git clone https://github.com/your-username/tdx-finance-mcp-plugin.git "$PLUGIN_DIR" || {
+    git clone https://github.com/adambbhe/tdx-finance-mcp-plugin.git "$PLUGIN_DIR" || {
         print_error "无法克隆仓库！"
         exit 1
     }
@@ -304,7 +304,7 @@ show_next_steps() {
     echo "📚 文档与支持："
     echo "  - 完整文档: README.md"
     echo "  - API参考: README.md#api文档"
-    echo "  - 问题反馈: https://github.com/your-username/tdx-finance-mcp-plugin/issues"
+    echo "  - 问题反馈: https://github.com/adambbhe/tdx-finance-mcp-plugin/issues"
     echo ""
     echo "=========================================="
 }

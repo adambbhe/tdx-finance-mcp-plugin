@@ -159,7 +159,7 @@ tdx-finance-mcp-plugin/
 
 ```bash
 # 方式A: 从 GitHub 克隆（推荐）
-git clone https://github.com/your-username/tdx-finance-mcp-plugin.git
+git clone https://github.com/adambbhe/tdx-finance-mcp-plugin.git
 cd tdx-finance-mcp-plugin
 
 # 方式B: 一键安装脚本（推荐！自动配置 Token + 安装 Skills）
@@ -228,7 +228,7 @@ tdx-finance-mcp: installed skill: tdx-dragon-tiger     ← 技能 ✅
 ### 方法一：本地开发模式
 
 ```bash
-git clone https://github.com/your-username/tdx-finance-mcp-plugin.git
+git clone https://github.com/adambbhe/tdx-finance-mcp-plugin.git
 cd tdx-finance-mcp-plugin
 npm install
 
@@ -720,7 +720,7 @@ tdx-finance-mcp-plugin/
 ### 本地开发
 
 ```bash
-git clone https://github.com/your-username/tdx-finance-mcp-plugin.git
+git clone https://github.com/adambbhe/tdx-finance-mcp-plugin.git
 cd tdx-finance-mcp-plugin
 npm install
 export TDX_API_KEY="your-test-token"
@@ -910,8 +910,8 @@ SOFTWARE.
 
 ## 📞 联系方式
 
-- **问题反馈**: [GitHub Issues](https://github.com/your-username/tdx-finance-mcp-plugin/issues)
-- **功能建议**: [GitHub Discussions](https://github.com/your-username/tdx-finance-mcp-plugin/discussions)
+- **问题反馈**: [GitHub Issues](https://github.com/adambbhe/tdx-finance-mcp-plugin/issues)
+- **功能建议**: [GitHub Discussions](https://github.com/adambbhe/tdx-finance-mcp-plugin/discussions)
 
 ---
 
