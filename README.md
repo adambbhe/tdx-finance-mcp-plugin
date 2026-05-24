@@ -116,19 +116,23 @@ tdx-finance-mcp-plugin/
 
 ## ✨ 功能特性
 
-### 🔧 核心工具（9个）
+### 🔧 核心工具（9个）及权限状态
 
-| # | 工具名称 | 功能描述 | API服务器 | 分类 |
-|---|---------|---------|----------|------|
-| 1 | **tdx_api_data** | 统一 F10 内部 API 调用（18种参数模板） | 服务器1 | 核心引擎 |
-| 2 | **tdx_quotes** | 实时行情查询（报价、盘口、涨跌幅等） | 服务器1 | 行情数据 |
-| 3 | **tdx_kline** | K 线历史数据查询（多周期） | 服务器1 | 行情数据 |
-| 4 | **tdx_lookup_stock** | 股票/指数/基金代码名称 RAG 检索 | 服务器2 | 工具类 |
-| 5 | **tdx_screener** | 自然语言智能选股 | 服务器1 | 选股工具 |
-| 6 | **tdx_indicator_select** | 金融指标选择与查询 | 服务器1 | 指标工具 |
-| 7 | **wenda_news_query** | 金融新闻/快讯搜索 | 服务器3 | 新闻资讯 |
-| 8 | **wenda_report_query** | 券商研究报告搜索 | 服务器3 | 研究报告 |
-| 9 | **wenda_notice_query** | 公司公告/定期报告搜索 | 服务器3 | 公告信息 |
+> 🟢 = 完全可用 | 🟡 = 部分可用 | 🔴 = 需开通
+
+| # | 工具名称 | 功能描述 | API服务器 | 权限状态 |
+|---|---------|---------|----------|---------|
+| 1 | **tdx_quotes** | 实时行情查询（报价、盘口、涨跌幅等） | 服务器1 | 🟢 **可用** |
+| 2 | **tdx_kline** | K 线历史数据查询（多周期） | 服务器1 | 🟢 **可用** |
+| 3 | **tdx_lookup_stock** | 股票/指数/基金代码名称 RAG 检索 | 服务器2 | 🟢 **可用** |
+| 4 | **tdx_screener** | 自然语言智能选股 | 服务器1 | 🟢 **可用** |
+| 5 | **tdx_indicator_select** | 金融指标选择与查询 | 服务器1 | 🟢 **可用** |
+| 6 | **wenda_news_query** | 金融新闻/快讯搜索 | 服务器3 | 🟢 **可用** |
+| 7 | **wenda_report_query** | 券商研究报告搜索 | 服务器3 | 🟢 **可用** |
+| 8 | **wenda_notice_query** | 公司公告/定期报告搜索 | 服务器3 | 🟢 **可用** |
+| 9 | **tdx_api_data** | 统一 F10 内部 API 调用（18种参数模板） | 服务器1 | 🟡 **部分可用** (3个Entry可用) |
+
+> 详细权限说明见 [API 权限说明](#api-权限说明重要)
 
 ### 📊 数据覆盖范围
 
@@ -142,6 +146,166 @@ tdx-finance-mcp-plugin/
 ### 🎯 支持的 44+ 专业技能
 
 详见 [支持技能列表](#支持的技能)
+
+---
+
+## ⚠️ API 权限说明（重要！）
+
+> **最后更新**: 2026-05-24 | **测试 Token**: `TDX-3d84119f...`  
+> **测试环境**: Node.js v25.2.1 | 所有接口均通过实际调用验证
+
+### 📋 权限概览
+
+不同 Token 可能拥有不同的 API 权限。以下是基于**标准 Token** 的实测结果：
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    Token 权限等级示意                         │
+│                                                             │
+│  🔓 基础版 (当前Token)    → 8个核心工具 + 部分F10数据       │
+│  🔑 专业版 (需联系开通)   → 完整F10 + 分时 + 更多模块        │
+│  💎 企业版 (需联系开通)   → 全部79+ Entry + 高频数据         │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### ✅ 完全可用的功能（无需额外开通）
+
+以下功能在**基础 Token** 下即可正常使用：
+
+#### 🟢 核心工具（8/9 个完全可用）
+
+| 工具 | 功能 | Entry 名称 | 状态 | 响应时间 |
+|------|------|-----------|------|---------|
+| `tdx_quotes` | 实时行情查询 | `TdxShare.PBHQInfo` | ✅ **可用** | ~260ms |
+| `tdx_kline` | K线历史数据 | `TdxShare.PBFXT` | ✅ **可用** | ~92ms |
+| `tdx_screener` | 自然语言智能选股 | `JNLPSE:wendaQuery` | ✅ **可用** | ~214ms |
+| `tdx_indicator_select` | 金融指标选择 | `NLPSE:InfoSelectV2` | ✅ **可用** | ~1298ms |
+| `tdx_lookup_stock` | 股票代码RAG检索 | AI RAG API | ✅ **可用** | ~259ms |
+| `wenda_news_query` | 新闻/快讯搜索 | Wenda `/zx_query` | ✅ **可用** | ~230ms |
+| `wenda_report_query` | 券商研报搜索 | Wenda `/yb_query` | ✅ **可用** | ~191ms |
+| `wenda_notice_query` | 公司公告搜索 | Wenda `/gg_search` | ✅ **可用** | ~232ms |
+
+#### 🟢 F10 基本面数据（部分 Entry 可用）
+
+通过 `tdx_api_data` 工具，以下 F10 子模块已验证可用：
+
+| F10 Entry | 数据类型 | fixedTag | 状态 | 说明 |
+|-----------|---------|----------|------|------|
+| `tdxf10_gg_ybpj` | 盈利预测/一致预期 | `yzyq` | ✅ **可用** | 分析师EPS预测表 |
+| `tdxf10_gg_rdtc` | 热点题材板块族谱 | `zttzbkz` | ✅ **可用** | 概念题材映射 |
+| `tdxf10_gg_rdtc` | 事件驱动催化列表 | `sjcd` | ✅ **可用** | 近期催化事件 |
+
+#### 🟡 部分可用（可能需要调试参数）
+
+以下 F10 接口返回 `-1005 参数执行失败`，可能是参数格式问题：
+
+| F10 Entry | 数据类型 | 当前状态 | 建议 |
+|-----------|---------|---------|------|
+| `tdxf10_gg_gsgk` | 公司基本信息 | ⚠️ **参数错误** | 尝试其他 fixedTag 值 |
+| `tdxf10_gg_gdyj` | 股东持股明细 | ⚠️ **参数错误** | 尝试其他 fixedTag 值 |
+| `tdxf10_gg_jyds` | 龙虎榜涨停数据 | ⚠️ **参数错误** | 尝试其他 fixedTag 值 |
+
+---
+
+### ❌ 需要联系通达信开通的功能
+
+以下 Entry 返回错误码 `E|-7201` 或 `E|-7202`（模块未注册），需要升级 Token 权限：
+
+#### 🔴 未注册的 Entry 清单（抽样）
+
+| 类别 | Entry 示例 | 功能 | 错误码 |
+|------|-----------|------|--------|
+| **行情类** | `TdxQuotes.GetStockQuote` | 标准行情接口 | E|-7201 |
+| **行情类** | `TdxQuotes.GetRealtimeQuote` | 实时报价接口 | E|-7201 |
+| **行情类** | `TdxQuotes.GetOrderBook` | 五档盘口接口 | E|-7201 |
+| **行情类** | `TdxQuotes.SearchStock` | 股票搜索接口 | E|-7201 |
+| **基本面** | `TdxF10.GetCompanyInfo` | 标准公司信息 | E|-7201 |
+| **基本面** | `TdxFinance.GetFinanceInfo` | 标准财务数据 | E|-7201 |
+| **新闻类** | `TdxNews.GetStockNews` | 标准新闻接口 | E|-7201 |
+| **指数类** | `TdxIndex.GetIndex` | 指数数据接口 | E|-7201 |
+| **板块类** | `TdxBlock.GetBlockList` | 板块列表接口 | E|-7201 |
+| **市场类** | `TdxBase.GetMarketStatus` | 市场状态接口 | E|-7201 |
+| **F10详细** | `tdxf10_gg_cwbb` | 完整财务报表 | E|-7202 |
+| **F10详细** | `tdxf10_gg_fhfx` | 分红融资详情 | E|-7202 |
+| **F10详细** | `tdxf10_gg_gbxx` | 股本结构详情 | E|-7202 |
+
+> **完整未注册列表**: 约 77 个 Entry（详见下方 [完整权限矩阵](#完整权限矩阵)）
+
+---
+
+### 🎯 技能可用性对照表
+
+基于上述权限情况，45 个技能的实际可用性：
+
+#### ✅ 可完整使用的技能（约 30+ 个）
+
+这些技能依赖的工具和 Entry **全部可用**：
+
+| 分类 | 可用技能 | 主要依赖 |
+|------|---------|---------|
+| **行情分析** | tdx-agzxsb, tdx-ztltby, tdx-bkbj, tdx-board-cpbd | tdx_quotes, tdx_kline ✅ |
+| **智能筛选** | tdx-wxd-a, tdx-wxd-bk, tdx-wxd-etf, tdx-wxd-jj | tdx_screener ✅ |
+| **资讯研报** | tdx-mrtyjb, tdx-zzjdysyfx, tdx-yjygby, tdx-zjftjytl | wenda_* 系列 ✅ |
+| **策略决策** | tdx-position-decision, tdx-trade-plan, tdx-event-driven-* | tdx_quotes, tdx_kline ✅ |
+| **估值分析** | tdx-valuation-pricing-framework, tdx-gszddf | tdx_indicator_select ✅ |
+| **热点题材** | tdx-hot-topic | tdx_api_data (rdtc) ✅ |
+
+#### ⚠️ 部分可用的技能（约 10+ 个）
+
+这些技能依赖的 F10 数据**部分可用或需调试**：
+
+| 技能 | 依赖的 F10 数据 | 当前状态 |
+|------|---------------|---------|
+| `tdx-company-info` | 公司概要 (gsgk) | ⚠️ 参数调试中 |
+| `tdx-shareholder-research` | 股东持股 (gdyj) | ⚠️ 参数调试中 |
+| `tdx-dragon-tiger` | 龙虎榜 (jyds) | ⚠️ 参数调试中 |
+| `tdx-financials` | 财务报表 (cwbb) | ❌ 需开通 |
+| `tdx-dividend-financing` | 分红融资 (fhfx) | ❌ 需开通 |
+| `tdx-share-capital` | 股本结构 (gbxx) | ❌ 需开通 |
+| `tdx-report-rating` | 机构评级 (jgpj) | ❌ 需开通 |
+| `tdx-fsxypmsb` | 盈利预测 (yzyq标准版) | ❌ 需开通 |
+| `tdx-earnings-warning` | 业绩预警 | ❌ 需开通 |
+| `tdx-stock-events` | 重大事件 | ❌ 需开通 |
+
+---
+
+### 📞 如何开通更多权限？
+
+如需使用完整的 F10 数据和其他专业模块，请联系通达信官方：
+
+```bash
+# 联系方式
+📧 Email: service@tdx.com.cn (示例)
+🌐 网站: https://www.tdx.com.cn
+💬 说明: 申请开通 TDX Hub API 完整权限
+
+# 需要提供的信息：
+1. 当前 Token: TDX-3d84119f1671fdc5be19967086fbcfe0
+2. 需要开通的模块:
+   - [ ] 完整 F10 基本面数据 (tdxf10_gg_*)
+   - [ ] 分时数据 (GetTodayMinute, GetTickData)
+   - [ ] 标准行情接口 (TdxQuotes.*)
+   - [ ] 其他: _______________
+```
+
+---
+
+### 🔍 自测权限方法
+
+你可以使用插件自带的权限检查工具：
+
+```bash
+# 方法1: 快速检查（9个核心接口）
+node check-api-status.js
+
+# 方法2: 深度权限验证（27个Entry）
+node deep-permission-test.js
+
+# 输出示例:
+# ✅ 可用: 10 个 (37%)
+# 🔴 未注册: 17 个 (63%)
+# 结论: Token 有效，基础功能可用
+```
 
 ---
 
