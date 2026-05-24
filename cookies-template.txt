@@ -1,0 +1,37 @@
+# TDX Wenda Cookie Manual Import Template
+# ============================================
+# 
+# 使用方法:
+# 1. 在浏览器中打开 https://pul.tdx.com.cn 并登录
+# 2. 按 F12 打开开发者工具
+# 3. 切换到 Network (网络) 标签
+# 4. 刷新页面 (F5)
+# 5. 点击任意请求 (左侧列表中的第一个)
+# 6. 在右侧 Headers 中找到 "Cookie:" 行
+# 7. 复制 Cookie 值（分号后面的部分），粘贴到下方
+#
+# 格式: 每行一个 Cookie，格式为 name=value
+# 示例: session_id=abc123def456
+
+# ====== 请在下方粘贴你的 Cookie (每行一个) ======
+
+# 示例 (请替换为真实值):
+# session_id=your_session_id_here
+# token=your_token_here
+# JSESSIONID=your_jsession_id_here
+# tdx_user=your_username_here
+
+
+# ====== 常见 Cookie 名称参考 ======
+# pul.tdx.com.cn 可能使用的 Cookie:
+#   - session_id    会话ID
+#   - token         认证令牌
+#   - JSESSIONID    Java会话ID
+#   - tdx_uid       用户ID
+#   - tdx_ticket    登录票据
+#
+# www.tdx.com.cn 可能使用的 Cookie:
+#   - wenda_session Wenda会话
+#   - tdx_auth      认证信息
+#   - uid           用户标识
+#   - sid           会话ID
